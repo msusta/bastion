@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<direct>
+  <chain table="filter" ipv="ipv4" chain="IN_public_ssh"/>
+  <rule priority="1" table="filter" ipv="ipv4" chain="IN_public_ssh">-p tcp --dport 22 -m state --state ESTABLISHED,RELATED -j ACCEPT</rule>
+  <rule priority="2" table="filter" ipv="ipv4" chain="IN_public_ssh">-p tcp --dport 22 -m state --state NEW -m limit --limit 3/min --limit-burst 3 -j ACCEPT</rule>
+  <rule priority="3" table="filter" ipv="ipv4" chain="IN_public_ssh">-p tcp --dport 22 -j DROP</rule>
+  <rule priority="0" table="filter" ipv="ipv4" chain="IN_public_allow">-p tcp --dport 22 -j IN_public_ssh</rule>
+</direct>
