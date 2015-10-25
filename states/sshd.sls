@@ -8,6 +8,9 @@ sshd-conf:
     - changes:
       - set PermitRootLogin without-password
       - set X11Forwarding no
+      - set PasswordAuthentication no
+      - set LoginGraceTime 30
+      - set MaxStartups 2:30:10
     - require:
       - pkg: sshd-pkg
       - pkg: augeas-pkg
