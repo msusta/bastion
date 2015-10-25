@@ -3,3 +3,4 @@
     - augeas
     - sshd
     - firewall
+    - openvpn
