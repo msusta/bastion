@@ -2,6 +2,16 @@ openvpn-pkg:
   pkg.installed:
     - name: openvpn
 
+bastion-ca-cert:
+  file.managed:
+    - name: /etc/openvpn/bastion-ca.pem
+    - source: salt://files/bastion-ca.pem
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - pkg: openvpn-pkg
+
 openvpn-conf:
   file.managed:
     - name: /etc/openvpn/server.conf
@@ -32,3 +42,23 @@ openvpn-key:
     - require:
       - pkg: openvpn-pkg
 
+openvpn-dh:
+  cmd.run:
+    - name: 'openssl dhparam -out /etc/openvpn/dh2048.pem 2048'
+    - unless: 'file /etc/openvpn/dh2048.pem'
+
+openvpn-service:
+  service.running:
+    - name: openvpn
+    - enabled: True
+    - reload: False
+    - watch:
+      - file: openvpn-conf
+      - file: openvpn-cert
+      - file: openvpn-key
+      - file: openvpn-dh
+    - require:
+      - file: openvpn-conf
+      - file: openvpn-cert
+      - file: openvpn-key
+      - file: openvpn-dh
