@@ -45,7 +45,7 @@ openvpn-key:
 openvpn-dh:
   cmd.run:
     - name: 'openssl dhparam -out /etc/openvpn/dh2048.pem 2048'
-    - unless: 'file /etc/openvpn/dh2048.pem'
+    - unless: 'stat /etc/openvpn/dh2048.pem'
 
 openvpn-service:
   service.running:
@@ -56,9 +56,9 @@ openvpn-service:
       - file: openvpn-conf
       - file: openvpn-cert
       - file: openvpn-key
-      - file: openvpn-dh
+      - cmd: openvpn-dh
     - require:
       - file: openvpn-conf
       - file: openvpn-cert
       - file: openvpn-key
-      - file: openvpn-dh
+      - cmd: openvpn-dh
