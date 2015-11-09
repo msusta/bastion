@@ -50,7 +50,7 @@ openvpn-dh:
 openvpn-service:
   service.running:
     - name: openvpn
-    - enabled: True
+    - enable: True
     - reload: False
     - watch:
       - file: openvpn-conf
