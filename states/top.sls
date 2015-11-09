@@ -4,3 +4,4 @@
     - sshd
     - firewall
     - openvpn
+    - sumo

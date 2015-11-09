@@ -24,7 +24,7 @@ firewall-sshd:
 firewall-svc:
   service.running:
     - name: firewalld
-    - enabled: True
+    - enable: True
     - reload: True
     - watch:
       - file: firewall-sshd
