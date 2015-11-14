@@ -3,5 +3,6 @@
     - augeas
     - sshd
     - firewall
+    - sumo
     - openvpn
     - apache
