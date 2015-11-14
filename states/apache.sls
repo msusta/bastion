@@ -32,7 +32,7 @@ apache-ssl-ca-cert:
 
 apache-ssl-conf:
   file.managed:
-    - name: /etc/apache/mods-available/ssl.conf
+    - name: /etc/apache2/mods-available/ssl.conf
     - source: salt://files/apache-ssl.conf
     - mode: 644
     - user: root
