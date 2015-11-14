@@ -54,7 +54,7 @@ apache-security:
 
 apache-svc:
   service.running:
-    - name apache2
+    - name: apache2
     - enable: True
     - reload: True
     - watch:
